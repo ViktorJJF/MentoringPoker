@@ -152,6 +152,90 @@ async function handleDialogFlowAction(
   parameters
 ) {
   switch (action) {
+    case "PasosPsw888Action":
+      let asesores = [
+        {
+          mensaje:
+            "Hola, te hemos asignado a Nidia Aguilar como tu asesor, ella te guiará en los pasos para obtener el beneficio TORNEOS GRATUITOS, la puedes contactar vía WhatsApp dando click al siguiente enlace: ",
+          bitly: "https://bit.ly/37r0Y10",
+        },
+        {
+          mensaje:
+            "Hola, te hemos asignado a Guillermo Pereira como tu asesor, el te guiará en los pasos para obtener el beneficio TORNEOS GRATUITOS, le puedes contactar vía WhatsApp dando click al siguiente enlace:",
+          bitly: "https://bit.ly/2VxZ3lO",
+        },
+        {
+          mensaje:
+            "Hola, te hemos asignado a Miguel Benitez como tu asesor, el te guiará en los pasos para obtener el beneficio TORNEOS GRATUITOS, le puedes contactar vía WhatsApp dando click al siguiente enlace:",
+          bitly: "https://bit.ly/2VAu6x6",
+        },
+        {
+          mensaje:
+            "Hola, te hemos asignado a Lina Corrales como tu asesor, ella te guiará en los pasos para obtener el beneficio TORNEOS GRATUITOS, la puedes contactar vía WhatsApp dando click al siguiente enlace:",
+          bitly: "https://bit.ly/37rg7iS",
+        },
+      ];
+      let asesor = asesores[Random(0, asesores.length - 1)];
+      await sendTextMessage(sender, asesor.mensaje);
+      await sendGenericMessage(sender, [
+        {
+          title: "Torneos gratuitos",
+          image_url:
+            "https://firebasestorage.googleapis.com/v0/b/newagent-lkbg.appspot.com/o/WAPP.png?alt=media&token=67f90e7d-64a6-46f3-af26-b2ca641815a2",
+          buttons: [
+            {
+              type: "web_url",
+              url: asesor.bitly,
+              title: "Quiero ser guiado",
+            },
+          ],
+        },
+      ]);
+
+      break;
+
+    case "Info.EscuelaAction":
+      let asesoresInfoEscuela = [
+        {
+          mensaje:
+            "Mentoring es una Escuela Online totalmente gratuita cumpliendo algunos requisitos, comunícate con tu asesor asignado Nidia Aguilar ella, RESOLVERÁ TUS DUDAS y te guiará en el proceso de admisión vía WhatsApp dando click al siguiente enlace: ",
+          bitly: "https://mentoringshortlinks.page.link/EduGratis",
+        },
+        {
+          mensaje:
+            "Mentoring es una Escuela Online totalmente gratuita cumpliendo algunos requisitos, comunícate con tu asesor asignado Guillermo Pereira, el RESOLVERÁ TUS DUDAS y te guiará en el proceso de admisión vía WhatsApp dando click al siguiente enlace:",
+          bitly: "https://bit.ly/3mwtQeL",
+        },
+        {
+          mensaje:
+            "Mentoring es una Escuela Online totalmente gratuita cumpliendo algunos requisitos, comunícate con tu asesor asignado Miguel Benítez, el RESOLVERÁ TUS DUDAS y te guiará en el proceso de admisión vía WhatsApp dando click al siguiente enlace: ",
+          bitly: "https://bit.ly/2GSddue",
+        },
+        {
+          mensaje:
+            "Hola, te hemos asignado a Lina Corrales como tu asesor, ella te guiará en los pasos para obtener el beneficio TORNEOS GRATUITOS, la puedes contactar vía WhatsApp dando click al siguiente enlace:",
+          bitly: "https://bit.ly/37rg7iS",
+        },
+      ];
+      let asesorInfoEscuela =
+        asesoresInfoEscuela[Random(0, asesoresInfoEscuela.length - 1)];
+      await sendTextMessage(sender, asesorInfoEscuela.mensaje);
+      await sendGenericMessage(sender, [
+        {
+          title: "Info Escuela",
+          image_url:
+            "https://firebasestorage.googleapis.com/v0/b/newagent-lkbg.appspot.com/o/WAPP.png?alt=media&token=67f90e7d-64a6-46f3-af26-b2ca641815a2",
+          buttons: [
+            {
+              type: "web_url",
+              url: asesorInfoEscuela.bitly,
+              title: "Educación gratuita",
+            },
+          ],
+        },
+      ]);
+
+      break;
     default:
       //unhandled action, just send back the text
       handleMessages(messages, sender);
@@ -543,6 +627,12 @@ function isDefined(obj) {
   }
 
   return obj != null;
+}
+
+function Random(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 module.exports = router;
